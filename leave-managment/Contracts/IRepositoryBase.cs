@@ -9,6 +9,7 @@ namespace leave_managment.Repository
     {
         ICollection<T> FindAll();
         T FindById(int Id);
+        bool isExists(int Id);
         bool Create(T entity);
         bool Read(T entity);
         bool Update(T entity);
