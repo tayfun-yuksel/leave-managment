@@ -10,8 +10,8 @@ using leave_managment.Data;
 namespace leave_managment.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200809212059_AddedLeaveDetailsTables")]
-    partial class AddedLeaveDetailsTables
+    [Migration("20200813123139_addedDefaultDaysAndPeriod")]
+    partial class addedDefaultDaysAndPeriod
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -246,6 +246,9 @@ namespace leave_managment.Data.Migrations
                     b.Property<int>("NumberOfDays")
                         .HasColumnType("int");
 
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
@@ -307,6 +310,9 @@ namespace leave_managment.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DefaultDays")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -314,6 +320,25 @@ namespace leave_managment.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LeaveTypes");
+                });
+
+            modelBuilder.Entity("leave_managment.Models.LeaveTypeVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DetailsLeaveTypeVM");
                 });
 
             modelBuilder.Entity("leave_managment.Data.Employee", b =>
